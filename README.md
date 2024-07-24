@@ -96,17 +96,6 @@ The `.env` file is the one that contains all your configurations, generated keys
 
 -  **SECRET_KEY** - This key is used to encrypt all sensitive data and makes your project more secure. Кeep the secret key used in production secret!
 
--  **SUPERUSER_EMAIL** - Default superuser email
-
--  **SUPERUSER_PASSWORD** - Default superuser password
-
--  **SUPERUSER_USERNAME** - Default superuser username
-
--  **SUPERUSER_FIRST_NAME** - Default superuser firstname
-
--  **SUPERUSER_LAST_NAME** - Default superuser lastname
-
--  **DEFAULT_TIME_ZONE** - That timezone will be used by default (example: `"Europe/Kiev"`)
 
 #### Postgres
 
