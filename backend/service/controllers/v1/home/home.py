@@ -1,7 +1,8 @@
 from typing import Dict
 
-from db.session import DBSession
 from fastapi import APIRouter, Request
+
+from db.session import DBSession
 from service.core import settings
 from service.schemas import v1 as schemas_v1
 

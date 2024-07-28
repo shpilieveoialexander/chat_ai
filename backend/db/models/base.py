@@ -1,11 +1,12 @@
 from typing import Any, Dict
 
-from db.crud.base import BaseCRUD
-from db.utils import get_default_now
-from service.utils import camel_to_snake
 from sqlalchemy import Column, DateTime, Integer
 from sqlalchemy.ext.declarative import declared_attr
 from sqlalchemy.orm import DeclarativeBase
+
+from db.crud.base import BaseCRUD
+from db.utils import get_default_now
+from service.utils import camel_to_snake
 
 
 class BaseModel(BaseCRUD, DeclarativeBase):

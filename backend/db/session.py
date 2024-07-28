@@ -1,6 +1,7 @@
-from service.core import settings
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+
+from service.core import settings
 
 # Create engine
 engine = create_engine(
