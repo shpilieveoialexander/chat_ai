@@ -1,9 +1,10 @@
 import logging
 
-from service.core import settings
 from sqlalchemy_utils import create_database, database_exists
 from tenacity import (after_log, before_log, retry, stop_after_attempt,
                       wait_fixed)
+
+from service.core import settings
 
 logging.basicConfig(format="%(levelname)s:    %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)

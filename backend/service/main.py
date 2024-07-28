@@ -1,8 +1,12 @@
 import multiprocessing
 
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, status
+from fastapi.encoders import jsonable_encoder
+from fastapi.exceptions import ValidationException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import UJSONResponse
+
 from service.controllers.v1.api import router_v1
 from service.controllers.v1.home import home
 from service.core import settings
@@ -12,6 +16,14 @@ app = FastAPI(
     version=settings.VERSION,
     openapi_url=f"/openapi.json",
 )
+
+
+@app.exception_handler(ValidationException)
+async def validation_exception_handler(request: Request, exc: ValidationException):
+    return UJSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content=jsonable_encoder({"detail": exc.errors()}),
+    )
 
 
 # Set all CORS enabled origins
