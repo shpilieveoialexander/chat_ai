@@ -1,6 +1,7 @@
 from .auth import Auth, SignUp
 from .home import HomeResponse
 from .jwt_token import JWTTokenPayload, JWTTokensResponse
+from .post import Post, PostCreate
 from .user import UserBase
 
 __all__ = (
@@ -14,4 +15,7 @@ __all__ = (
     "JWTTokenPayload",
     # User
     "UserBase",
+    # Post
+    "PostCreate",
+    "Post",
 )
