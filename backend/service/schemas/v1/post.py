@@ -14,6 +14,7 @@ class PostCreate(BaseModel):
 class Post(BaseModel):
     id: int
     text: str
+    is_blocked: bool
     updated_at: datetime
     created_at: datetime
     user: UserBase
