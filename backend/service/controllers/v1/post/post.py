@@ -30,12 +30,19 @@ async def create_posts(
     `422` UNPROCESSABLE_ENTITY - Failed field validation\n
     """
     if profanity.contains_profanity(input_data.text):
+        post = models.Post(
+            user_id=current_user.id, text=input_data.text, is_blocked=True
+        )
+        with session() as db:
+            db.add(post)
+            db.commit()
+            db.refresh(post)
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Post contains inappropriate language.",
         )
 
-    post = models.Post(user_id=current_user.id, text=input_data.text)
+    post = models.Post(user_id=current_user.id, text=input_data.text, is_blocked=False)
     with session() as db:
         db.add(post)
         db.commit()
@@ -61,11 +68,6 @@ async def update_post(
     `403` FORBIDDEN - Invalid authorization\n
     `422` UNPROCESSABLE_ENTITY - Failed field validation\n
     """
-    if profanity.contains_profanity(input_data.text):
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Post contains inappropriate language.",
-        )
     post_query = select(models.Post).where(
         models.Post.id == post_id, models.Post.user_id == current_user.id
     )
@@ -75,6 +77,17 @@ async def update_post(
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Post not found or you can't edit it.",
+        )
+    if profanity.contains_profanity(input_data.text):
+        post.text = input_data.text
+        post.is_blocked = True
+        with session() as db:
+            db.add(post)
+            db.commit()
+            db.refresh(post)
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Post contains inappropriate language.",
         )
     post.text = input_data.text
     with session() as db:
