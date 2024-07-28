@@ -12,6 +12,7 @@ tenacity==8.2.3
 ###############
 # For Backend #
 ###############
+better-profanity==0.7.0
 email-validator==2.1.0.post1
 fastapi==0.109.0
 fastapi-pagination==0.12.14

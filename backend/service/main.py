@@ -6,6 +6,7 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import ValidationException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import UJSONResponse
+from fastapi_pagination import add_pagination
 
 from service.controllers.v1.api import router_v1
 from service.controllers.v1.home import home
@@ -16,6 +17,8 @@ app = FastAPI(
     version=settings.VERSION,
     openapi_url=f"/openapi.json",
 )
+
+add_pagination(app)
 
 
 @app.exception_handler(ValidationException)
