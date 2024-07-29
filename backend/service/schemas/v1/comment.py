@@ -39,3 +39,8 @@ class DailyCommentStats(BaseModel):
 
 class CommentsDailyBreakdownResponse(BaseModel):
     breakdown: List[DailyCommentStats]
+
+
+class DailyCommentStatsResponse(BaseModel):
+    blocked: int
+    unblocked: int

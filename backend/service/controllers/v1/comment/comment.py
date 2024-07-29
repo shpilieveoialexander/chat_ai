@@ -168,7 +168,7 @@ async def get_comment_by_id(
     return comment
 
 
-@router.get("/daily-breakdown/", response_model=None)
+@router.get("/daily-breakdown/", response_model=schemas_v1.DailyCommentStatsResponse)
 def get_comments_daily_breakdown(
     date_from: date = Query(...),
     date_to: date = Query(...),

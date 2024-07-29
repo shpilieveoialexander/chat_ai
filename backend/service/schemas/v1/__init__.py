@@ -1,6 +1,6 @@
 from .auth import Auth, SignUp
 from .comment import (Comment, CommentCreate, CommentsDailyBreakdownResponse,
-                      CommentUpdate, DailyCommentStats)
+                      CommentUpdate, DailyCommentStats, DailyCommentStatsResponse)
 from .home import HomeResponse
 from .jwt_token import JWTTokenPayload, JWTTokensResponse
 from .post import Post, PostCreate
@@ -25,5 +25,6 @@ __all__ = (
     "Comment",
     "CommentUpdate",
     "DailyCommentStats",
+    "DailyCommentStatsResponse",
     "CommentsDailyBreakdownResponse",
 )
