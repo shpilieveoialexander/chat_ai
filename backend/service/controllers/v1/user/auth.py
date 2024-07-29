@@ -103,7 +103,6 @@ async def user_sign_up(
     session: DBSession = Depends(get_session),
 ) -> UJSONResponse:
     """
-    Admin User sign up\n
     Sign Up User. Return User\n
     Responses:\n
     `201` CREATED - Everything is good (SUCCESS Response)\n
