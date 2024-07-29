@@ -15,13 +15,17 @@ def get_comments_breakdown(db: Session, date_from: date, date_to: date):
             func.count(models.Comment.id).label("count"),
         )
         .filter(
-            models.Comment.created_at >= date_from, models.Comment.created_at <= date_to
+            models.Comment.created_at >= date_from,
+            models.Comment.created_at <= date_to,
         )
         .group_by(cast(models.Comment.created_at, Date), models.Comment.is_blocked)
         .all()
     )
 
     daily_stats = {}
+    total_blocked = 0
+    total_unblocked = 0
+
     for result in results:
         date_str = result.date.strftime("%Y-%m-%d")
         if date_str not in daily_stats:
@@ -32,10 +36,16 @@ def get_comments_breakdown(db: Session, date_from: date, date_to: date):
             }
         if result.is_blocked:
             daily_stats[date_str]["blocked_count"] += result.count
+            total_blocked += result.count
         else:
             daily_stats[date_str]["unblocked_count"] += result.count
+            total_unblocked += result.count
 
     breakdown = [
         schemas_v1.DailyCommentStats(**stats) for stats in daily_stats.values()
     ]
-    return schemas_v1.CommentsDailyBreakdownResponse(breakdown=breakdown)
+
+    return {
+        "blocked": total_blocked,
+        "unblocked": total_unblocked,
+    }
