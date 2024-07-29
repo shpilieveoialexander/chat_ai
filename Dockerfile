@@ -2,7 +2,6 @@
 # Build image from python v3.11
 FROM python:3.11
 
-LABEL maintainer="Andrii Hryshchenko <frikcio67@gmail.com>"
 LABEL developer="Alexsandr Shpilevoy <shpilevoy29@gmail.com>"
 
 # Remove apt cache
