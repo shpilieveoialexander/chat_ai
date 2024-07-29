@@ -36,3 +36,5 @@ celerybeat-schedule
 # Security files #
 ##################
 .ssh/
+
+*.env
