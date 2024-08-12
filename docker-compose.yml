@@ -8,7 +8,7 @@ services:
     volumes:
       - db:/var/lib/postgresql/data
     env_file:
-      - local.env
+      - .env
     environment:
       - POSTGRES_DB=$PSQL_DB_NAME
       - POSTGRES_USER=$PSQL_USER
